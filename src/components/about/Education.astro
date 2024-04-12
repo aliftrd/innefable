@@ -1,0 +1,57 @@
+---
+import { getFileUrl } from '@/libs/supabase';
+import { fetchEducations } from '@/libs/supabase';
+import { Image } from 'astro:assets';
+import { ChevronRight } from 'lucide-react';
+
+const { data: educations } = await fetchEducations();
+educations?.map((education) => {
+  education.logo = getFileUrl(education.logo);
+});
+---
+
+<h1 class='font-jetbrains text-xl font-semibold'>Education</h1>
+<div>
+  {
+    educations &&
+      educations.map((education) => (
+        <div class='mb-4 flex flex-col gap-2 md:flex-row md:gap-8'>
+          <div>
+            <Image
+              class='rounded-full border-4 border-white shadow-lg grayscale filter transition duration-300 ease-in-out hover:grayscale-0 md:block'
+              width={50}
+              height={50}
+              src={education.logo}
+              loading='eager'
+              alt='Logo education'
+            />
+          </div>
+          <div>
+            <h2 class='text-md font-jetbrains font-semibold'>
+              {education.name}
+            </h2>
+            <p class='font-nunito text-sm font-normal'>
+              {education.major}{' '}
+              {education.gpa && `(Current GPA: ${education.gpa})`}
+            </p>
+            <time class='font-jetbrains text-sm font-normal text-gray-500'>
+              {new Date(education.time_start).getFullYear()} -{' '}
+              {education.time_end
+                ? new Date(education.time_end).getFullYear()
+                : 'present'}
+            </time>
+            {education.achievements && education.achievements?.length > 0 && (
+              <ul class='mt-2'>
+                {education.achievements.map((achievement: any) => (
+                  <li class='font-nunito text-sm font-normal'>
+                    <ChevronRight className='mr-2 inline-block h-4 w-4 text-purple-500' />
+                    {achievement.achievement}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </div>
+      ))
+  }
+</div>

@@ -1,0 +1,52 @@
+---
+interface Props {
+  title: string;
+}
+import '../styles/global.css';
+import { SEO } from 'astro-seo';
+import { fetchKeywords } from '@/libs/supabase';
+
+const { title } = Astro.props;
+const { data: keywords } = await fetchKeywords();
+const keywordsStr = keywords?.map((keyword) => keyword.value).join(',');
+---
+
+<!doctype html>
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8' />
+    <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+    <meta name='viewport' content='width=device-width' />
+    <meta name='generator' content={Astro.generator} />
+    <SEO
+      title={title}
+      description='Belajar Astro'
+      canonical='https://aliftriadi.my.id'
+      openGraph={{
+        basic: {
+          title: 'Alif Triadi',
+          image: '/favicon.svg',
+          type: 'website',
+          url: 'https://aliftriadi.my.id',
+        },
+      }}
+      twitter={{
+        card: 'summary',
+        title: 'Alif Triadi',
+        image: '/favicon.svg',
+        description: 'Belajar Astro',
+      }}
+      extend={{
+        meta: [{ name: 'keywords', content: keywordsStr }],
+      }}
+    />
+  </head>
+  <body class='font-nunito'>
+    <slot />
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+    </style>
+  </body>
+</html>

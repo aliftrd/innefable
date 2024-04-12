@@ -1,0 +1,59 @@
+---
+import { fetchWorkExperiences, getFileUrl } from '@/libs/supabase';
+import { Image } from 'astro:assets';
+import { ChevronRight } from 'lucide-react';
+
+const dateMonthFormatter = Intl.DateTimeFormat('en-US', {
+  month: 'short',
+  year: 'numeric',
+});
+
+function formatDateString(date: string) {
+  return dateMonthFormatter.format(new Date(date));
+}
+
+const { data: works } = await fetchWorkExperiences();
+works?.map((work) => {
+  work.logo = getFileUrl(work.logo);
+});
+---
+
+<h1 class='font-jetbrains text-xl font-semibold'>WorkExperience</h1>
+
+<div>
+  {
+    works &&
+      works.map((work) => (
+        <div class='mb-4 flex flex-col gap-2 md:flex-row md:gap-8'>
+          <div>
+            <Image
+              class='rounded-full border-4 border-white shadow-lg grayscale filter transition duration-300 ease-in-out hover:grayscale-0 md:block'
+              width={50}
+              height={50}
+              src={work.logo}
+              loading='lazy'
+              alt='Logo education'
+            />
+          </div>
+          <div>
+            <h2 class='text-md font-jetbrains font-semibold'>{work.name}</h2>
+            <p class='font-nunito text-sm font-normal'>{work.role}</p>
+            <time class='font-jetbrains text-sm font-normal text-gray-500'>
+              {formatDateString(work.time_start)} -{' '}
+              {work.time_end ? formatDateString(work.time_end) : 'present'}
+            </time>
+            {work.jobs && work.jobs?.length > 0 && (
+              <ul class='mt-2'>
+                {work.jobs.map((job: any) => (
+                  <li class='font-nunito text-sm font-normal'>
+                    <ChevronRight className='mr-2 inline-block h-4 w-4 text-purple-500' />
+                    {job.value}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </div>
+      ))
+  }
+</div>

@@ -1,0 +1,14 @@
+---
+import { SunIcon } from 'lucide-react';
+import { Button } from '@radix-ui/themes';
+---
+
+<Button aria-label='Toggle dark mode' id='themeToggle'>
+  <SunIcon />
+</Button>
+
+<script is:inline>
+  document.querySelector('#themeToggle').addEventListener('click', () => {
+    console.log('hewewo');
+  });
+</script>

@@ -1,0 +1,45 @@
+{
+  "name": "innefable",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "lint": "eslint --fix \"src/**/*.{js,ts,jsx,tsx,astro}\"",
+    "format": "prettier --write --plugin=prettier-plugin-astro \"src/**/*.{js,ts,jsx,tsx,astro}\""
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.5.10",
+    "@astrojs/react": "^3.3.0",
+    "@astrojs/tailwind": "^5.1.0",
+    "@radix-ui/themes": "^3.0.2",
+    "@supabase/supabase-js": "^2.42.0",
+    "@types/react": "^18.2.76",
+    "@types/react-dom": "^18.2.25",
+    "astro": "^4.5.18",
+    "astro-compress": "^2.2.22",
+    "astro-seo": "^0.8.3",
+    "clsx": "^2.1.0",
+    "lucide-react": "^0.367.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tailwind-merge": "^2.2.2",
+    "tailwindcss": "^3.4.3",
+    "typescript": "^5.4.4"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^7.6.0",
+    "@typescript-eslint/parser": "^7.6.0",
+    "astro-eslint-parser": "^0.17.0",
+    "eslint": "^9.0.0",
+    "eslint-plugin-astro": "^0.34.0",
+    "eslint-plugin-jsx-ally": "^6.0.3",
+    "prettier": "^3.2.5",
+    "prettier-plugin-astro": "^0.13.0",
+    "prettier-plugin-tailwindcss": "^0.5.13",
+    "sharp": "^0.33.3"
+  }
+}

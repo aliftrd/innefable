@@ -1,0 +1,18 @@
+---
+import About from '@/components/about/About.astro';
+import Header from '@/components/Header.astro';
+import Hero from '@/components/Hero.astro';
+import Layout from '@/layouts/Layout.astro';
+---
+
+<Layout title='Innefable - Portfolio'>
+  <div
+    class='relative mx-auto my-12 flex max-w-[692px] flex-col px-8 sm:my-32 md:my-16 md:px-2'
+  >
+    <main class='flex-1'>
+      <Header />
+      <Hero />
+      <About />
+    </main>
+  </div>
+</Layout>

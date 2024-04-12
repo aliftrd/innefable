@@ -1,0 +1,36 @@
+---
+import { fetchAbout } from '@/libs/supabase';
+import { ArrowRightIcon } from 'lucide-react';
+import Education from './Education.astro';
+import WorkExperience from './WorkExperience.astro';
+
+const { data } = await fetchAbout();
+const about = data.value;
+const cvUrl = data.cv ?? '#';
+---
+
+<section class='relative' id='about'>
+  <div class='container mb-12 space-y-2 font-nunito'>
+    <h1 class='font-jetbrains text-xl font-semibold'>About</h1>
+    <p class='text-justify'>
+      {about}
+    </p>
+    <a
+      class='group relative inline-flex cursor-pointer items-center justify-center overflow-hidden rounded-md bg-neutral-950 px-6 py-2 font-medium text-neutral-200'
+      href={cvUrl}
+    >
+      Download CV
+      <div
+        class='w-0 translate-x-[100%] pl-0 opacity-0 transition-all duration-200 group-hover:w-5 group-hover:translate-x-0 group-hover:pl-1 group-hover:opacity-100'
+      >
+        <ArrowRightIcon />
+      </div>
+    </a>
+  </div>
+  <div class='container mb-12 space-y-2 font-nunito'>
+    <Education />
+  </div>
+  <div class='container mb-12 space-y-2 font-nunito'>
+    <WorkExperience />
+  </div>
+</section>
